@@ -17,4 +17,5 @@ playing a music
 ![](https://i.imgur.com/MSPbjig.png)  
 searching from youtube
 
-
+## Add This Bot to Your Server  
+Click this [link](https://bit.ly/3Ef1H4D) to add this bot to your server
