@@ -1,3 +1,0 @@
-!stop  				instantly disconnect the bot
-!p + keyword			play audio of a youtube video based on the keyword
-!q				search youtube videos based on keyword
