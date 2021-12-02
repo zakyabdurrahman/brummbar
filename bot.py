@@ -10,7 +10,7 @@ from discord.ext import commands
 
 
 playing = False
-logging.basicConfig(level=logging.DEBUG, format=' %(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.CRITICAL, format=' %(asctime)s - %(levelname)s - %(message)s')
 class MyBot(commands.Bot):
     def __init__(self) -> None:
         watching = discord.Activity(type=discord.ActivityType.watching, name='for !p to play music')
@@ -106,6 +106,7 @@ class Music(commands.Cog):
                         if item.guild == VClient.guild:
                             guildSongList = item
                             break
+                    guildSongList = self.findsongList(ctx.guild)
                 
                 
                 logging.critical(VClient.is_playing)
@@ -160,7 +161,7 @@ class Music(commands.Cog):
             logging.critical(f'current index is {playlist.index}')
         except:
             logging.critical('no next song')
-        time.sleep(20)
+        await time.sleep(5)
         if not player.is_playing:
             if playlist:
                 self.trackList.remove(playlist)
