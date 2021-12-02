@@ -10,7 +10,7 @@ from discord.ext import commands
 
 
 playing = False
-logging.basicConfig(level=logging.CRITICAL, format=' %(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.DEBUG, format=' %(asctime)s - %(levelname)s - %(message)s')
 class MyBot(commands.Bot):
     def __init__(self) -> None:
         watching = discord.Activity(type=discord.ActivityType.watching, name='for !p to play music')
@@ -129,8 +129,9 @@ class Music(commands.Cog):
                 else: 
                     await ctx.send('either no results or bot is still playing')
                     
-            except:
+            except BaseException as err:
                 await ctx.send("not in vc")
+                logging.critical(f"exception occured {err}")
     
 
     @commands.command()
