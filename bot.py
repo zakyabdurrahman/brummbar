@@ -161,7 +161,7 @@ class Music(commands.Cog):
             logging.critical(f'current index is {playlist.index}')
         except:
             logging.critical('no next song')
-        await time.sleep(5)
+        time.sleep(5)
         if not player.is_playing:
             if playlist:
                 self.trackList.remove(playlist)
