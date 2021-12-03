@@ -54,6 +54,14 @@ class Music(commands.Cog):
         return None
     
     @commands.Cog.listener()
+    #listen if bot disconnected
+    async def on_voice_state_update(self, member, before, after):
+        logging.critical(f"the member: {member} changed, {before} -> {after}")
+    
+    
+    
+    
+    @commands.Cog.listener()
     #add 1 to i when a player start a track
     async def on_pomice_track_start(self, player, track):
         logging.critical(f'{track} is starting')
