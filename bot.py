@@ -56,7 +56,21 @@ class Music(commands.Cog):
     @commands.Cog.listener()
     #listen if bot disconnected
     async def on_voice_state_update(self, member, before, after):
-        logging.critical(f"the member: {member} changed, {before} -> {after}")
+        logging.critical(f"the member: {member} changed, {before.channel} -> {after.channel}")
+        try: 
+            functionGuild = before.channel.guild
+        except: 
+            functionGuild = None
+        if member == self.bot.user and after.channel == None:
+            
+            #find the voiceclient 
+            for VClient in self.bot.voice_clients:
+                if VClient.guild == functionGuild:
+                    dead = VClient.is_dead
+                    logging.critical(f'vclient found: {VClient}, is it dead? {dead}')
+                    await VClient.destroy()
+                    break
+            
     
     
     
@@ -100,7 +114,9 @@ class Music(commands.Cog):
                 
                 #if bot is not in the vc
                 if not self.bot.user in vc.members:
+                    
                     VClient = await vc.connect(cls=pomice.Player)
+                    
                     guildSongList = songList(VClient.guild)
                     self.trackList.append(guildSongList)
                     self.vc.append(VClient)
