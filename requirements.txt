@@ -3,7 +3,7 @@ async-timeout==3.0.1
 attrs==21.2.0
 cffi==1.15.0
 chardet==4.0.0
-discord.py==2.0.0a3575+g45d498c1
+git+https://github.com/Rapptz/discord.py
 idna==3.3
 multidict==5.2.0
 pomice @ git+https://github.com/cloudwithax/pomice.git@fcbca4e8e1e92e7b9e5948221d878de963eb753c
