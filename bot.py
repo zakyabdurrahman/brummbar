@@ -102,7 +102,7 @@ class Music(commands.Cog):
             ctx.send("not found or bot isn't connected to vc yet")
 
 
-    @commands.command()
+    @commands.command(aliases=['play'])
     async def p(self, ctx: commands.Context, *, search: str):
         #make bot join and check if it already joined a vc
         
@@ -140,10 +140,12 @@ class Music(commands.Cog):
                         
                     await VClient.play(track=results[0])
                     guildSongList.add(results[0])
-                    music = str(results[0].title)                        
+                    music = str(results[0].title)
+                    thumbnail = str(results[0].uri)
                     #track announcer
-                    logging.critical('play invoked')
+                    logging.critical(results)
                     await ctx.send(f"**Playing** `{music}`")
+                    await ctx.send(thumbnail)
                     return   
                         
                 elif results:
