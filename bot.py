@@ -1,4 +1,4 @@
-import discord, os, logging, pomice, time
+import discord, os, logging, pomice, time, asyncio
 
 
 
@@ -80,7 +80,8 @@ class Music(commands.Cog):
     async def on_pomice_track_start(self, player, track):
         logging.critical(f'{track} is starting')
         playlist = self.findsongList(player.guild)
-        playlist.index += 1
+        if playlist:
+            playlist.index += 1
 
 
 
@@ -133,6 +134,9 @@ class Music(commands.Cog):
                     guildSongList = self.findsongList(ctx.guild)
                 
                 
+                if not guildSongList:
+                    guildSongList = songList(VClient.guild)
+                    self.trackList.append(guildSongList)
                 logging.critical(VClient.is_playing)
                 results = await VClient.get_tracks(query=f'{search}')
                 
@@ -145,7 +149,7 @@ class Music(commands.Cog):
                     #track announcer
                     logging.critical(results)
                     await ctx.send(f"**Playing** `{music}`")
-                    await ctx.send(thumbnail)
+                    
                     return   
                         
                 elif results:
@@ -187,7 +191,7 @@ class Music(commands.Cog):
             logging.critical(f'current index is {playlist.index}')
         except:
             logging.critical('no next song')
-        time.sleep(5)
+        await asyncio.sleep(20)
         if not player.is_playing:
             if playlist:
                 self.trackList.remove(playlist)
