@@ -102,6 +102,15 @@ class Music(commands.Cog):
         else:
             ctx.send("not found or bot isn't connected to vc yet")
 
+    @commands.command(aliases=['h'])
+    async def help(self, ctx: commands.Context):
+        embed = discord.Embed(title="Commands", description="""This is all kinds of commands you can use. 
+        Its honestly pretty barebone right now, but I will add more features in some time.
+        """, color=discord.Color.purple())
+        embed.add_field(name="!p + <keyword>", value="Use this command to play an audio from Youtube. e.g `!p panzelied`", inline=False)
+        embed.add_field(name="(!q or !query) + <keyword>", value="Use this command to search Youtube, it will return top 5 entry that matched", inline=False)
+        embed.add_field(name="!stop", value="Use this command to stop, clear all playlist and disconnect the bot", inline=False)
+        ctx.send(embed=embed)
 
     @commands.command(aliases=['play'])
     async def p(self, ctx: commands.Context, *, search: str):
