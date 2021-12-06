@@ -161,7 +161,7 @@ class Music(commands.Cog):
                     await ctx.send('either no results or bot is still playing')
                     
             except BaseException as err:
-                await ctx.send("not in vc")
+                await ctx.send("you are not in a voice channel")
                 logging.critical(f"exception occured {err}")
     
 
