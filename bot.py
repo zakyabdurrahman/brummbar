@@ -112,6 +112,19 @@ class Music(commands.Cog):
         else:
             ctx.send("not found or bot isn't connected to vc yet")
 
+    @commands.command(aliases=['l'])
+    async def loop(self, ctx: commands.Context):
+        localSongList = self.findsongList(ctx.guild)
+        if localSongList:
+            if localSongList.loop == False:
+                localSongList.loop = True
+                await ctx.send('**Loop Enabled**')
+            else:
+                localSongList.loop = False
+                await ctx.send('**Loop Disabled**')
+
+
+
     @commands.command(aliases=['np', 'pl'])
     async def playlist(self, ctx: commands.Context):
         localSongList = self.findsongList(ctx.guild)
@@ -207,11 +220,15 @@ class Music(commands.Cog):
         if player.is_playing:
             await player.stop()
         playlist = self.findsongList(player.guild)
-        try:
+        try: #this is the mechanism to play through the playlist ot looping
             await player.play(playlist.songs[playlist.index])
             logging.critical(f'current index is {playlist.index}')
-        except:
-            logging.critical('no next song')
+        except: 
+            if playlist.loop == True:
+                playlist.index = 0
+                await player.play(playlist.songs[0])
+            else:
+                logging.critical('no next song')
         await asyncio.sleep(20)
         if not player.is_playing:
             if playlist:
