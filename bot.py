@@ -112,8 +112,18 @@ class Music(commands.Cog):
         else:
             ctx.send("not found or bot isn't connected to vc yet")
 
-    
-
+    @commands.command(aliases=['np', 'pl'])
+    async def playlist(self, ctx: commands.Context):
+        localSongList = self.findsongList(ctx.guild)
+        i = 0
+        if localSongList:
+            await ctx.send('**Currently Playing:**')
+            for song in localSongList.songs:
+                i += 1
+                await ctx.send(f'`{i}. {song.title}`')
+        else:
+            await ctx.send('There is no playlist')
+        
     @commands.command(aliases=['play'])
     async def p(self, ctx: commands.Context, *, search: str):
         #make bot join and check if it already joined a vc
