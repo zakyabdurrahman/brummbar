@@ -226,10 +226,11 @@ class Music(commands.Cog):
             await player.play(playlist.songs[playlist.index])
             logging.critical(f'current index is {playlist.index}')
         except: 
-            if playlist.loop == True:
-                playlist.index = 0
-                await player.play(playlist.songs[0])
-            else:
+            try:
+                if playlist.loop == True:
+                    playlist.index = 0
+                    await player.play(playlist.songs[0])
+            except:
                 logging.critical('no next song')
         await asyncio.sleep(20)
         if not player.is_playing:
