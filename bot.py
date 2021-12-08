@@ -65,7 +65,7 @@ class Music(commands.Cog):
                 return songlist
         return None
 
-    def milisecToMinutes(self, milisec): #return dict of times
+    def milisecToMinutes(milisec): #return dict of times
         outputDict = {
             'seconds': 0,
             'minutes': 0
@@ -73,7 +73,12 @@ class Music(commands.Cog):
         rawSec = milisec / 1000
         seconds = rawSec % 60
         minutes = (rawSec - seconds) / 60
-        outputDict['seconds'] = int(seconds)
+        seconds = int(seconds)
+        formattedSeconds = str(seconds)
+        if seconds < 10:
+            formattedSeconds = '0' + formattedSeconds
+        outputDict['seconds'] = formattedSeconds
+        
         outputDict['minutes'] = int(minutes)
         return outputDict
 
