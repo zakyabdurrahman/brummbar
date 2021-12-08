@@ -59,11 +59,25 @@ class Music(commands.Cog):
         await self.pomice.create_node(bot=self.bot, host='node1.cjstevenson.com', port='25503', password='lookbehindyou', identifier='RussianMartabak', spotify_client_id=None, spotify_client_secret=None)
         logging.critical("node ready")
     
-    def findsongList(self, guild):
+    def findsongList(self, guild): #function to find songList object for the server
         for songlist in self.trackList:
             if songlist.guild == guild:
                 return songlist
         return None
+
+    def milisecToMinutes(self, milisec): #return dict of times
+        outputDict = {
+            'seconds': 0,
+            'minutes': 0
+        }
+        rawSec = milisec / 1000
+        seconds = rawSec % 60
+        minutes = (rawSec - seconds) / 60
+        outputDict['seconds'] = int(seconds)
+        outputDict['minutes'] = int(minutes)
+        return outputDict
+
+
     
     @commands.Cog.listener()
     #listen if bot disconnected
