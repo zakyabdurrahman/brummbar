@@ -1,4 +1,4 @@
-import discord, os, logging, pomice, time, asyncio
+import discord, os, logging, pomice, asyncio
 
 
 
@@ -65,21 +65,22 @@ class Music(commands.Cog):
                 return songlist
         return None
 
-    def milisecToMinutes(milisec): #return dict of times
+    def milisecToMinutes(self, milisec): #return dict of times
         outputDict = {
             'seconds': 0,
             'minutes': 0
         }
-        rawSec = milisec / 1000
+        rawSec = int(milisec / 1000)
         seconds = rawSec % 60
-        minutes = (rawSec - seconds) / 60
-        seconds = int(seconds)
+        minutes = int((rawSec - seconds) / 60)
+        
         formattedSeconds = str(seconds)
+        formattedMinutes = str(minutes)
         if seconds < 10:
             formattedSeconds = '0' + formattedSeconds
         outputDict['seconds'] = formattedSeconds
         
-        outputDict['minutes'] = int(minutes)
+        outputDict['minutes'] = formattedMinutes
         return outputDict
 
 
@@ -146,18 +147,43 @@ class Music(commands.Cog):
 
 
 
-    @commands.command(aliases=['np', 'pl'])
+    @commands.command(aliases=['pl'])
     async def playlist(self, ctx: commands.Context):
         localSongList = self.findsongList(ctx.guild)
         i = 0
         if localSongList:
-            await ctx.send('**Currently Playing:**')
+            await ctx.send('**Currently Playlist:**')
             for song in localSongList.songs:
                 i += 1
                 await ctx.send(f'`{i}. {song.title}`')
         else:
             await ctx.send('There is no playlist')
-        
+    #now playing will return current track and the position + duration
+    @commands.command(aliases=['np'])
+    async def nowplaying(self, ctx: commands.Context):
+        localGuild = ctx.guild
+        player = None
+        for VClient in self.bot.voice_clients:
+            if VClient.guild == localGuild:
+                player = VClient
+                break
+        try:
+            track = player.current
+            title = track.title
+            duration = track.length
+            logging.critical(duration)
+            ftime = self.milisecToMinutes(duration) #dict
+            print(ftime)
+            minutes = ftime['minutes']
+            seconds = ftime['seconds']
+            await ctx.send('**Currently Playing:**')
+            await ctx.send(f'`{title}; {minutes}:{seconds}`')
+        except BaseException as err:
+            logging.critical(err)
+            await ctx.send('currently not playing anything')
+            
+
+
     @commands.command(aliases=['play'])
     async def p(self, ctx: commands.Context, *, search: str):
         #make bot join and check if it already joined a vc
