@@ -44,8 +44,9 @@ class Misc(commands.Cog):
         embed.add_field(name="!p + <keyword>", value="Use this command to play an audio from Youtube. e.g `!p panzelied`", inline=False)
         embed.add_field(name="(!q or !query) + <keyword>", value="Use this command to search Youtube, it will return top 5 entry that matched", inline=False)
         embed.add_field(name="!stop", value="Use this command to stop, clear all playlist and disconnect the bot", inline=False)
-        embed.add_field(name='(!playlist or !np or !pl)', value="Use this command to see the current playlist", inline=False)
+        embed.add_field(name='(!playlist or !pl)', value="Use this command to see the current playlist", inline=False)
         embed.add_field(name='(!loop or !l)', value="Use this command to enable Brummbar to loop the playlist", inline=False)
+        embed.add_field(name="(!nowplaying or !np)", value="Use this command to see the current track and its duration")
         await ctx.send(embed=embed)
 
 class Music(commands.Cog):
