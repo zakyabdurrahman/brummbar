@@ -173,12 +173,17 @@ class Music(commands.Cog):
             title = track.title
             duration = track.length
             logging.critical(duration)
-            ftime = self.milisecToMinutes(duration) #dict
+            ftime = self.milisecToMinutes(duration) #dict or the total duration
+            currentPosition = player.position
+            fcurrentPosition = self.milisecToMinutes(currentPosition)
+            currentMinutes = fcurrentPosition['minutes']
+            currentSeconds = fcurrentPosition['seconds']
             print(ftime)
-            minutes = ftime['minutes']
-            seconds = ftime['seconds']
+            totalMinutes = ftime['minutes']
+            totalSeconds = ftime['seconds']
             await ctx.send('**Currently Playing:**')
-            await ctx.send(f'`{title}; {minutes}:{seconds}`')
+            await ctx.send(f'`{title}; {currentMinutes}:{currentSeconds} - {totalMinutes}:{totalSeconds}`')
+
         except BaseException as err:
             logging.critical(err)
             await ctx.send('currently not playing anything')
@@ -209,10 +214,7 @@ class Music(commands.Cog):
                         if channel.channel == vc:
                             VClient = channel
                             break
-                    for item in self.trackList:
-                        if item.guild == VClient.guild:
-                            guildSongList = item
-                            break
+                    
                     guildSongList = self.findsongList(ctx.guild)
                 
                 
