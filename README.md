@@ -9,6 +9,10 @@ Brummbär is a Python discord music bot made using discord.ext module and Pomice
 `!p` + keyword			play audio of a youtube video based on the keyword if bot is playing will add to playlist  
 `!q` or `!query`    search youtube videos based on keyword (bot must already be connected)   
 `!h` or `!help`     will show available commands
+`!pl` or `playlist` will show the current playlist
+`!l` or `!loop`     will enable loop for the current playlist
+`!np` or `!nowplaying` will show the track thats currently being played, its duration and current position
+
 ### Examples
 
 ![](https://i.imgur.com/wEpxuLC.png)  
