@@ -49,7 +49,7 @@ class Misc(commands.Cog):
         embed.add_field(name='(!loop or !l)', value="Use this command to enable Brummbar to loop the playlist", inline=False)
         embed.add_field(name="(!nowplaying or !np)", value="Use this command to see the current track and its duration", inline=False)
         embed.add_field(name= "!skip", value="Use this command to skip currently playing track", inline=False)
-        
+
         await ctx.send(embed=embed)
 
 class Music(commands.Cog):
@@ -124,7 +124,26 @@ class Music(commands.Cog):
         if playlist:
             playlist.index += 1
 
-
+    @commands.command()
+    async def seek(self, ctx: commands.Context, *, minutes: str):
+        try:
+            minutes = float(minutes)
+            #convert minutes to milisec
+            milisec = minutes * 60000
+            #get the current track's room to manuever
+            player = self.findVoiceClient(ctx.guild)
+            if player: #if bot is playing
+                room = (player.current.length - player.position) - milisec
+                if room > 0 and milisec > 0:
+                    await player.seek(milisec)
+                    await ctx.send(f'**Forwarded** `{minutes} minutes into the future`')
+                else:
+                    await ctx.send('you seek too much')
+            else:
+                await ctx.send('not playing')
+                    
+        except:
+            await ctx.send('Must be a number')
 
     @commands.command(aliases=['query'])
     async def q(self, ctx: commands.Context, *, search: str):
