@@ -1,4 +1,5 @@
 import discord, os, logging, pomice, asyncio
+from discord.ext.commands.core import command
 
 
 
@@ -46,7 +47,9 @@ class Misc(commands.Cog):
         embed.add_field(name="!stop", value="Use this command to stop, clear all playlist and disconnect the bot", inline=False)
         embed.add_field(name='(!playlist or !pl)', value="Use this command to see the current playlist", inline=False)
         embed.add_field(name='(!loop or !l)', value="Use this command to enable Brummbar to loop the playlist", inline=False)
-        embed.add_field(name="(!nowplaying or !np)", value="Use this command to see the current track and its duration")
+        embed.add_field(name="(!nowplaying or !np)", value="Use this command to see the current track and its duration", inline=False)
+        embed.add_field(name= "!skip", value="Use this command to skip currently playing track", inline=False)
+        
         await ctx.send(embed=embed)
 
 class Music(commands.Cog):
@@ -151,7 +154,10 @@ class Music(commands.Cog):
                 localSongList.loop = False
                 await ctx.send('**Loop Disabled**')
 
-
+    @commands.command()
+    async def skip(self, ctx: commands.Context):
+        player = self.findVoiceClient(ctx.guild)
+        await player.stop()
 
     @commands.command(aliases=['pl'])
     async def playlist(self, ctx: commands.Context):
