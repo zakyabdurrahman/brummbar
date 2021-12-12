@@ -83,6 +83,14 @@ class Music(commands.Cog):
         
         outputDict['minutes'] = formattedMinutes
         return outputDict
+    
+    def findVoiceClient(self, guild): #return the voice client in the server/guild
+        for VClient in self.bot.voice_clients:
+                if VClient.guild == guild:
+                    
+                    logging.critical(f'vclient found: {VClient}')
+                    return VClient
+        return None
 
 
     
@@ -97,12 +105,9 @@ class Music(commands.Cog):
         if member == self.bot.user and after.channel == None:
             
             #find the voiceclient 
-            for VClient in self.bot.voice_clients:
-                if VClient.guild == functionGuild:
-                    dead = VClient.is_dead
-                    logging.critical(f'vclient found: {VClient}, is it dead? {dead}')
-                    await VClient.destroy()
-                    break
+            VClient = self.findVoiceClient(functionGuild)
+            await VClient.destroy()
+            
             
     
     
@@ -163,11 +168,8 @@ class Music(commands.Cog):
     @commands.command(aliases=['np'])
     async def nowplaying(self, ctx: commands.Context):
         localGuild = ctx.guild
-        player = None
-        for VClient in self.bot.voice_clients:
-            if VClient.guild == localGuild:
-                player = VClient
-                break
+        
+        player = self.findVoiceClient(localGuild)
         try:
             track = player.current
             title = track.title
@@ -210,11 +212,7 @@ class Music(commands.Cog):
                     self.vc.append(VClient)
                 #if bot already in vc
                 else : 
-                    for channel in self.bot.voice_clients:
-                        if channel.channel == vc:
-                            VClient = channel
-                            break
-                    
+                    VClient = self.findVoiceClient(ctx.guild)
                     guildSongList = self.findsongList(ctx.guild)
                 
                 
