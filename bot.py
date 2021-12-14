@@ -1,5 +1,5 @@
 import discord, os, logging, pomice, asyncio
-from discord.ext.commands.core import command
+
 
 
 
