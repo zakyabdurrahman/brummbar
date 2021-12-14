@@ -21,7 +21,7 @@ will enable loop for the current playlist
 will show the track thats currently being played, its duration and current position  
 ### `!skip`  
 will skip over the current track to the next one in the playlist  
-### `!seek` + <number>  
+### `!seek` + number  
 Will seek the playing track forward based on input by minutes. e.g `!seek 1.5` will fast forward the track in 90 seconds  
 
 ### Examples
