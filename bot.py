@@ -1,10 +1,7 @@
 import discord, os, logging, pomice, asyncio
 
 
-
-
-
-
+from wikif import getWikiPage
 from helper import songList
 from discord.ext import commands
 
