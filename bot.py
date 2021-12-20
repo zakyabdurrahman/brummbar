@@ -43,6 +43,7 @@ class Misc(commands.Cog):
             if len(summary) > 4095:
                 summary = summary[0:4095]
             title = wikiPage.title
+            logging.critical(title)
             embed = discord.Embed(title=title, url=url, description=summary, colour=discord.Color.purple())
             try:
                 await ctx.send(embed=embed)
