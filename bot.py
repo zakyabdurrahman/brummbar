@@ -48,6 +48,7 @@ class Misc(commands.Cog):
             embed = discord.Embed(title=title, url=url, description=summary, colour=discord.Color.purple())
             try:
                 await ctx.send(embed=embed)
+                return
             except BaseException as err:
                 logging.critical(err)
         await ctx.send('No wiki page found on that term')
