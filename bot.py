@@ -44,7 +44,11 @@ class Misc(commands.Cog):
                 summary = summary[0:4095]
             title = wikiPage.title
             embed = discord.Embed(title=title, url=url, description=summary, colour=discord.Color.purple())
-            await ctx.send(embed=embed)
+            try:
+                await ctx.send(embed=embed)
+            except BaseException as err:
+                logging.critical(err)
+
     
     @commands.command(aliases=['h'])
     async def help(self, ctx: commands.Context):
