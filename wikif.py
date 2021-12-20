@@ -18,7 +18,7 @@ def getWikiPage(input):
 
     #form a regex and get the title from the first url that matched
 
-    wikiTitleRegex = re.compile(r"(/url\?q=https://en.wikipedia.org/wiki/)([\(\)A-Za-z_%]+)&[A-Za-z=]+")
+    wikiTitleRegex = re.compile(r"(/url\?q=https://en.wikipedia.org/wiki/)([\(\)\-\.A-Za-z_%]+)&[A-Za-z=]+")
     #parse the page title from google url
     wikiTitle = None
     for item in resultContainer:
