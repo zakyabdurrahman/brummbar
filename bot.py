@@ -38,6 +38,7 @@ class Misc(commands.Cog):
     async def wiki(self, ctx: commands.Context, *, input: str):
         wikiPage = getWikiPage(input)
         if wikiPage:
+            logging.critical('there is a wikiPage')
             url = wikiPage.fullurl
             summary = wikiPage.summary
             if len(summary) > 4095:
@@ -49,6 +50,7 @@ class Misc(commands.Cog):
                 await ctx.send(embed=embed)
             except BaseException as err:
                 logging.critical(err)
+        await ctx.send('No wiki page found on that term')
 
     
     @commands.command(aliases=['h'])
@@ -74,7 +76,7 @@ class Music(commands.Cog):
         self.trackList = []
         self.vc = []
     async def start_nodes(self):
-        await self.pomice.create_node(bot=self.bot, host='node1.cjstevenson.com', port='25503', password='lookbehindyou', identifier='RussianMartabak', spotify_client_id=None, spotify_client_secret=None)
+        await self.pomice.create_node(bot=self.bot, host='lavalink.eu', port='2333', password='Raccoon', identifier='RussianMartabak', spotify_client_id=None, spotify_client_secret=None)
         logging.critical("node ready")
     
     def findsongList(self, guild): #function to find songList object for the server
