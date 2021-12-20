@@ -40,8 +40,10 @@ class Misc(commands.Cog):
         if wikiPage:
             url = wikiPage.fullurl
             summary = wikiPage.summary
+            if len(summary) > 4095:
+                summary = summary[0:4095]
             title = wikiPage.title
-            embed = discord.Embed(title=title, url=url, description=summary)
+            embed = discord.Embed(title=title, url=url, description=summary, colour=discord.Color.purple())
             await ctx.send(embed=embed)
     
     @commands.command(aliases=['h'])
