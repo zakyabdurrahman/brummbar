@@ -33,6 +33,16 @@ class Misc(commands.Cog):
     @commands.command(aliases=['s'])
     async def sieg(self, ctx: commands.Context):
         await ctx.send('Heil!')
+
+    @commands.command(aliases=['w'])
+    async def wiki(self, ctx: commands.Context, *, input: str):
+        wikiPage = getWikiPage(input)
+        if wikiPage:
+            url = wikiPage.fullurl
+            summary = wikiPage.summary
+            title = wikiPage.title
+            embed = discord.Embed(title=title, url=url, description=summary)
+            await ctx.send(embed=embed)
     
     @commands.command(aliases=['h'])
     async def help(self, ctx: commands.Context):
