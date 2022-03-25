@@ -9,7 +9,7 @@ charset-normalizer==2.0.9
 git+https://github.com/Rapptz/discord.py
 idna==3.3
 multidict==5.2.0
-pomice==1.1.5.1
+pomice==1.1.6
 pycparser==2.21
 PyNaCl==1.4.0
 requests==2.26.0
