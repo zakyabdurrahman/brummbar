@@ -2,7 +2,7 @@
 ## A Discord music bot  
   
 ## Description  
-Brummbär is a Python discord music bot made using discord.ext module and Pomice to interact with Lavalink API to deliver high quality audio from Youtube. Following the end of Rythym, I decided to make my own music bot. It have a feature which make getting the right song from youtube search easier by allowing you to look up 5 top results from Youtube search based on keyword you entered. Other than that, it has normal features for a music bot such as making a playlist, stopping, etc  
+Brummbär is a Python discord music bot made using discord.ext module and Pomice to interact with Lavalink API to deliver high quality audio from Youtube. Following the end of Rythym, I decided to make my own music bot. It have a feature which make getting the right song from youtube search easier by allowing you to look up 5 top results from Youtube search based on keyword you entered. Other than that, it has normal features for a music bot such as making a playlist, stopping, etc. It also can be used to quickly grab a wikipedia article by keyword 
 
 ### Usage
 ### Music Function
