@@ -24,6 +24,8 @@ will show the track thats currently being played, its duration and current posit
 will skip over the current track to the next one in the playlist  
 #### `!seek` + number  
 Will seek the playing track forward based on input by minutes. e.g `!seek 1.5` will fast forward the track in 90 seconds  
+#### `!wiki` + keyword  
+Will look for a Wikipedia article that matched the keyword in google search  
 
 ### Examples
 
