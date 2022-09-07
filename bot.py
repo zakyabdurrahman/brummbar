@@ -86,7 +86,7 @@ class Music(commands.Cog):
         self.trackList = []
         self.vc = []
     async def start_nodes(self):
-        await self.pomice.create_node(bot=self.bot, host=HOST, port=PORT, password=PASS, identifier='RussianMartabak', spotify_client_id=None, spotify_client_secret=None)
+        await self.pomice.create_node(bot=self.bot, host=HOST, port=PORT, identifier='nazi', password=PASS, spotify_client_id=None, spotify_client_secret=None)
         logging.critical("node ready")
     
     def findsongList(self, guild): #function to find songList object for the server
