@@ -6,9 +6,9 @@ from helper import songList
 from discord.ext import commands
 
 # the global variable for the lavalink node
-HOST = os.getenv("HOST")
-PASS = os.getenv("PASS")
-PORT = int(os.getenv("PORT"))
+HOST = 'lavalink.oops.wtf'
+PASS = 'www.freelavalink.ga'
+PORT = 2000
 
 
 
