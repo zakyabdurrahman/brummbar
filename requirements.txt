@@ -10,7 +10,7 @@ git+https://github.com/Rapptz/discord.py
 PyNaCl==1.5.0
 idna==3.3
 multidict==5.2.0
-pomice==1.1.6
+pomice==1.1.7
 pycparser==2.21
 requests==2.26.0
 six==1.16.0

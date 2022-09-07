@@ -17,14 +17,18 @@ logging.basicConfig(level=logging.CRITICAL, format=' %(asctime)s - %(levelname)s
 class MyBot(commands.Bot):
     def __init__(self) -> None:
         watching = discord.Activity(type=discord.ActivityType.watching, name='for !p to play music')
-        super().__init__(command_prefix='!', activity=watching)
+        intent = discord.Intents.default()
+        intent.message_content = True
+        super().__init__(command_prefix='!', activity=watching, intents=intent)
         self.help_command = None
-        self.add_cog(Misc(self))
-        self.add_cog(Music(self))
+        
 
     async def on_ready(self) -> None:
+        await self.add_cog(Misc(self))
+        await self.add_cog(Music(self))
         logging.critical('i\'m ready')
-        await self.cogs['Music'].start_nodes()
+        music = self.get_cog('Music')
+        await music.start_nodes()
 
 
 
