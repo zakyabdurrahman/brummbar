@@ -8,7 +8,7 @@ from discord.ext import commands
 # the global variable for the lavalink node
 HOST = os.getenv("HOST")
 PASS = os.getenv("PASS")
-PORT = os.getenv("PORT")
+PORT = int(os.getenv("PORT"))
 
 
 
